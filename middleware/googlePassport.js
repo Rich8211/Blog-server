@@ -11,7 +11,7 @@ module.exports = passport => {
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: "http://localhost:5000/users/auth/google/callback"
       },
-      function(accessToken, refreshToken, profile, cb) {
+      (accessToken, refreshToken, profile, cb) => {
         User.findOne({ googleId: profile.id }, async (err, user) => {
             if (err) return cb(err, null);
             if (!user) {
