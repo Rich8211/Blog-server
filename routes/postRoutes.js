@@ -57,7 +57,10 @@ router.post("/", upload.single("postImage"),async (req, res) => {
 });
 
 router.get("/", async (req,res) => {
-    const posts = await Post.find();
+
+    const {limit, skip} = req.params;
+
+    const posts = await Post.find().skip(skip).limit(limit);
     res.json(posts);
 });
 
